@@ -1,0 +1,5 @@
+DLpnd\WeaponModCraftInfo.xml::HUDMainMenu
+true
+TheHUDEditor\Supported\WeaponModCraftInfo.xml::@Prefabs\TheHUDEditor\Include_Editor.xml::TheHUDEditor_Editor
+#DLpnd\WeaponModCraftInfo.xml
+True
