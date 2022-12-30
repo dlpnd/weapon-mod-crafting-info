@@ -1,43 +1,8 @@
 scn DLpndWeaponModCraftInfoMain
 
-int bDoOnce
-
-begin GameMode
-    if (bDoOnce == 0)
-        SetUIFloatAlt "HudMainmenu\DLpndWeaponModText\visible" 0
-        bDoOnce = 1
-    endif
-    ; if IsKeyPressed 28 == 1
-    ;     InjectUIXML "HUDMainMenu" "data\menus\prefabs\DLpnd\WeaponModCraftInfo.xml"
-    ; endif
-end
-
-begin MenuMode 1061 ; code within here should only run in the Item Mod Menu
-    let ref rSelectedItemReference := GetSelectedItemRef
-    if rSelectedItemReference
-        foreach array_var rSingleRecipe <- GetLoadedTypeArray 106 
-            foreach array_var rSingleRecipeItem <- GetRecipeOutputForms (*rSingleRecipe)
-                if eval *rSingleRecipeItem == rSelectedItemReference.gbo
-                    let string_var sRecipeTitle := $rSelectedItemReference
-                    
-                    foreach array_var rSingleRecipeIngredient <- GetRecipeInputForms (*rSingleRecipe)
-                        let string_var sRecipeString += "(" + $(Player.GetItemCount(*rSingleRecipeIngredient)) + "/" + $(GetRecipeInputCount(*rSingleRecipe) (*rSingleRecipeIngredient)) + ") " + $(*rSingleRecipeIngredient) + "%r"
-                    loop
-
-                    SetUIFloatAlt "HudMainmenu\DLpndWeaponModText\visible" 1
-                    SetUIStringAlt "HudMainmenu\_DLpndWeaponModTitle" $sRecipeTitle
-                    SetUIStringAlt "HudMainmenu\DLpndWeaponModText\string" (sRecipeString[0:-2])
-
-                    Sv_Destruct sRecipeTitle
-                    Sv_Destruct sRecipeString
-                    break
-                else
-                    break
-                endif
-            loop
-        loop
-    else
-        SetUIFloatAlt "HudMainmenu\DLpndWeaponModText\visible" 0
-        bDoOnce = 0
+begin Function{}
+    if GetGameLoaded
+        SetOnMenuOpenEventHandler DLpndWeaponModCraftInfoOpenHandler 1 1061
+        SetOnMenuCloseEventHandler DLpndWeaponModCraftInfoClose 1 1061
     endif
 end

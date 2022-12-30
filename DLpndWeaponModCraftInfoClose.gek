@@ -1,0 +1,8 @@
+scn DLpndWeaponModCraftInfoClose
+
+int iMenuID
+
+begin Function {iMenuID}
+    SetUIFloatAlt "HudMainmenu\DLpndWeaponModText\visible" 0
+    SetGameMainLoopCallback DLpndWeaponModCraftInfoOpen 0
+end

@@ -1,0 +1,7 @@
+scn DLpndWeaponModCraftInfoOpenHandler
+
+int iMenuID
+
+begin Function {iMenuID}
+    SetGameMainLoopCallback DLpndWeaponModCraftInfoOpen 1 2 2
+end
