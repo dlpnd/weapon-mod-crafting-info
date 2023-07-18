@@ -2,23 +2,16 @@ scn DLpndWeaponModCraftInfoOpen
 
 begin Function {}
     SetUIFloatAlt "HudMainmenu\DLpndWeaponModText\visible" 0
-    let ref rSelectedItemReference := GetSelectedItemRef
-    if rSelectedItemReference
-        foreach array_var rSingleRecipe <- GetLoadedTypeArray 106
-            foreach array_var rSingleRecipeItem <- GetRecipeOutputForms (*rSingleRecipe)
-                if eval *rSingleRecipeItem == rSelectedItemReference.gbo
-
-                    foreach array_var rSingleRecipeIngredient <- GetRecipeInputForms (*rSingleRecipe)
-                        let string_var sRecipeString += "(" + $(Player.GetItemCount(*rSingleRecipeIngredient)) + "/" + $(GetRecipeInputCount(*rSingleRecipe) (*rSingleRecipeIngredient)) + ") " + $(*rSingleRecipeIngredient) + "%r"
-                    loop
-
-                    SetUIStringAlt "HudMainmenu\_DLpndWeaponModTitle" ($rSelectedItemReference)
-                    SetUIStringAlt "HudMainmenu\DLpndWeaponModText\string" (sRecipeString[0:-2])
-                    SetUIFloatAlt "HudMainmenu\DLpndWeaponModText\visible" 1
-
-                    Sv_Destruct sRecipeString
-                endif
-            loop
+    if eval ref rSelectedMod = GetSelectedItemRef
+        foreach array_var fRecipe <- GLTA 106
+            if eval *(GetRecipeOutputForms (*fRecipe)) == rSelectedMod.GBO
+                foreach array_var fRecipeIngredient <- GetRecipeInputForms (*fRecipe)
+                    string_var sRecipe += Sv_Construct "(%g/%g) %n%r" (Player.GetItemCount (*fRecipeIngredient)) (GetRecipeInputCount (*fRecipe) (*fRecipeIngredient)) (*fRecipeIngredient)
+                loop
+                SetUIStringAlt "HudMainmenu\_DLpndWeaponModTitle" ($rSelectedMod)
+                SetUIStringAlt "HudMainmenu\DLpndWeaponModText\string" (sRecipe[0:-2])
+                SetUIFloatAlt "HudMainmenu\DLpndWeaponModText\visible" 1
+            endif
         loop
     endif
 end
