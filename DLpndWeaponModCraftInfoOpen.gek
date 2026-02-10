@@ -1,17 +1,20 @@
-scn DLpndWeaponModCraftInfoOpen
+name DLpndWeaponModCraftInfoOpen;
 
-begin Function {}
-    SetUIFloatAlt "HudMainmenu\DLpndWeaponModText\visible" 0
-    if eval ref rSelectedMod = GetSelectedItemRef
-        foreach array_var fRecipe <- GLTA 106
-            if eval *(GetRecipeOutputForms (*fRecipe)) == rSelectedMod.GBO
-                foreach array_var fRecipeIngredient <- GetRecipeInputForms (*fRecipe)
-                    string_var sRecipe += Sv_Construct "(%g/%g) %n%r" (Player.GetItemCount (*fRecipeIngredient)) (GetRecipeInputCount (*fRecipe) (*fRecipeIngredient)) (*fRecipeIngredient)
-                loop
-                SetUIStringAlt "HudMainmenu\_DLpndWeaponModTitle" ($rSelectedMod)
-                SetUIStringAlt "HudMainmenu\DLpndWeaponModText\string" (sRecipe[0:-2])
-                SetUIFloatAlt "HudMainmenu\DLpndWeaponModText\visible" 1
-            endif
-        loop
-    endif
-end
+fn () {
+    SetUIFloatAlt("HudMainmenu/DLpndWeaponModText/visible", 0);
+    ref rSelectedItemReference = GetSelectedItemRef();
+    if (!rSelectedItemReference) {
+        return;
+    }
+    for ([ref rSingleRecipe] in GetLoadedTypeArray(106)) {
+        if (GetRecipeOutputForms(rSingleRecipe)[0] == rSelectedItemReference.GetBaseObject()) {
+            string sRecipe = "";
+            for ([ref rRecipeIngredient] in GetRecipeInputForms(rSingleRecipe)) {
+                sRecipe += "(${player.GetItemCount(rRecipeIngredient)}/${GetRecipeInputCount(rSingleRecipe, rRecipeIngredient)}) ${rRecipeIngredient}\n";
+            }
+            SetUIStringAlt("HudMainmenu/_DLpndWeaponModTitle", $rSelectedItemReference);
+            SetUIStringAlt("HudMainmenu/DLpndWeaponModText/string", (sRecipe[0:-2]));
+            SetUIFloatAlt("HudMainmenu/DLpndWeaponModText/visible", 1);
+        }
+    }
+}

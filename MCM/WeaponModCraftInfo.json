@@ -1,0 +1,57 @@
+{
+    "modName": "WeaponModCraftInfo",
+    "displayName": "Weapon Mod Craft Info",
+    "description": "Displays Weapon Mods that can be crafted, and their ingredients.",
+    "saveFile": "WeaponModCraftInfo.ini",
+    "minMCMVersion": 1.30,
+    "minModVersion": 1.00,
+    "requirements": [
+        {
+            "type": "plugin",
+            "file": "WeaponModCraftInfo.esp"
+        }
+    ],
+    "submenus": {
+        "0": {
+            "columns": 1,
+            "listTitle": "Main",
+            "pageTitle": "Weapon Mod Info Settings",
+            "options": {
+                "1": {
+                    "type": 0,
+                    "title": "General Settings"
+                },
+                "2": {
+                    "title": "X/Y Coordinates for the UI Element",
+                    "type": 8,
+                    "enable": 1,
+                    "mouse": "Change X/Y Coordinates of the UI element, 0,0 is the top left corner",
+                    "vars": [
+                        {
+                            "uiTrait": "HUDMainMenu/DLpndWeaponModText/x",
+                            "default": 300,
+                            "configINI": "General:iXCoord"
+                        },
+                        {
+                            "uiTrait": "HUDMainMenu/DLpndWeaponModText/y",
+                            "default": 500,
+                            "configINI": "General:iYCoord"
+                        }
+                    ],
+                    "scale": {
+                        "setting1": "X Coordinate",
+                        "setting2": "Y Coordinate",
+                        "value1Decimal": 0,
+                        "value2Decimal": 0,
+                        "value1Increment": 1,
+                        "value2Increment": 1,
+                        "value1Min": 0,
+                        "value2Min": 0,
+                        "value1Max": 3840,
+                        "value2Max": 2160
+                    }
+                }
+            }
+        }
+    }
+}

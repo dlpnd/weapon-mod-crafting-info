@@ -1,6 +1,6 @@
-scn DLpndWeaponModCraftInfoClose
+name DLpndWeaponModCraftInfoClose;
 
-begin Function {int iMenuId}
-    SetUIFloatAlt "HudMainmenu\DLpndWeaponModText\visible" 0
-    SetGameMainLoopCallback DLpndWeaponModCraftInfoOpen 0
-end
+fn (int iMenuId) {
+    SetUIFloatAlt("HudMainMenu/DLpndWeaponModText/visible", 0);
+    SetGameMainLoopCallback(DLpndWeaponModCraftInfoOpen, 0);
+}

@@ -1,8 +1,6 @@
-scn DLpndWeaponModCraftInfoMain
+name DLpndWeaponModCraftInfoMain;
 
-begin Function{}
-    if GetGameLoaded
-        SetOnMenuOpenEventHandler DLpndWeaponModCraftInfoOpenHandler 1 1061
-        SetOnMenuCloseEventHandler DLpndWeaponModCraftInfoClose 1 1061
-    endif
-end
+fn () {
+    SetOnMenuOpenEventHandler(DLpndWeaponModCraftInfoOpenHandler, 1, 1061);
+    SetOnMenuCloseEventHandler(DLpndWeaponModCraftInfoClose, 1, 1061);
+}

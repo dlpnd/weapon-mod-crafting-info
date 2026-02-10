@@ -1,5 +1,5 @@
-scn DLpndWeaponModCraftInfoOpenHandler
+name DLpndWeaponModCraftInfoOpenHandler;
 
-begin Function {int iMenuId}
-    SetGameMainLoopCallback DLpndWeaponModCraftInfoOpen 1 5 2
-end
+fn (int iMenuId) {
+    SetGameMainLoopCallback(DLpndWeaponModCraftInfoOpen, 1, 5, 2);
+}
